@@ -1,0 +1,49 @@
+<div class="container mt-4">
+  <h2>Gestión de Menús</h2>
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row g-2">
+        <div class="col-md-3">
+          <input class="form-control" placeholder="Nombre" [(ngModel)]="form.nombre" />
+        </div>
+        <div class="col-md-3">
+          <input class="form-control" placeholder="Descripción" [(ngModel)]="form.descripcion" />
+        </div>
+        <div class="col-md-2">
+          <input class="form-control" type="number" [(ngModel)]="form.precio" />
+        </div>
+        <div class="col-md-2">
+          <input type="checkbox" [(ngModel)]="form.disponible" /> Disponible
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary" (click)="guardar()">
+            {{ editando ? 'Actualizar' : 'Agregar' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Disponible</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of menus">
+        <td>{{ m.menuId }}</td>
+        <td>{{ m.nombre }}</td>
+        <td>$ {{ m.precio }}</td>
+        <td>{{ m.disponible ? 'Sí' : 'No' }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning" (click)="editar(m)">Editar</button>
+          <button class="btn btn-sm btn-danger" (click)="eliminar(m.menuId)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

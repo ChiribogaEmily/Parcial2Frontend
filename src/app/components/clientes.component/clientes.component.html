@@ -1,0 +1,55 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Gestión de Clientes</h2>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">{{ editando ? 'Editar Cliente' : 'Nuevo Cliente' }}</h5>
+      <div class="row g-2">
+        <div class="col-md-2">
+          <input class="form-control" placeholder="Nombre" [(ngModel)]="form.nombre" />
+        </div>
+        <div class="col-md-2">
+          <input class="form-control" placeholder="Apellido" [(ngModel)]="form.apellido" />
+        </div>
+        <div class="col-md-3">
+          <input class="form-control" placeholder="Email" [(ngModel)]="form.email" />
+        </div>
+        <div class="col-md-2">
+          <input class="form-control" placeholder="Teléfono" [(ngModel)]="form.telefono" />
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-primary me-2" (click)="guardar()">
+            {{ editando ? 'Actualizar' : 'Agregar' }}
+          </button>
+          <button class="btn btn-secondary" *ngIf="editando" (click)="reset()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of clientes">
+        <td>{{ c.clienteId }}</td>
+        <td>{{ c.nombre }}</td>
+        <td>{{ c.apellido }}</td>
+        <td>{{ c.email }}</td>
+        <td>{{ c.telefono }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-1" (click)="editar(c)">Editar</button>
+          <button class="btn btn-sm btn-danger" (click)="eliminar(c.clienteId)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

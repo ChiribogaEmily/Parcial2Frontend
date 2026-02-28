@@ -1,0 +1,66 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Gestión de Órdenes</h2>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">Nueva Orden</h5>
+      <div class="row g-2">
+        <div class="col-md-3">
+          <select class="form-select" [(ngModel)]="form.clienteId">
+            <option value="0">Seleccionar cliente</option>
+            <option *ngFor="let c of clientes" [value]="c.clienteId">
+              {{ c.nombre }} {{ c.apellido }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select" [(ngModel)]="form.menuId">
+            <option value="0">Seleccionar menú</option>
+            <option *ngFor="let m of menus" [value]="m.menuId">
+              {{ m.nombre }} - ${{ m.precio }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <input
+            class="form-control"
+            type="number"
+            placeholder="Cantidad"
+            [(ngModel)]="form.cantidad"
+            min="1"
+          />
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary" (click)="guardar()">Agregar Orden</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Menú</th>
+        <th>Cantidad</th>
+        <th>Total</th>
+        <th>Fecha</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let o of ordenes">
+        <td>{{ o.ordenId }}</td>
+        <td>{{ o.cliente?.nombre }} {{ o.cliente?.apellido }}</td>
+        <td>{{ o.menu?.nombre }}</td>
+        <td>{{ o.cantidad }}</td>
+        <td>$ {{ o.total }}</td>
+        <td>{{ o.fecha | date: 'short' }}</td>
+        <td>
+          <button class="btn btn-sm btn-danger" (click)="eliminar(o.ordenId)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
